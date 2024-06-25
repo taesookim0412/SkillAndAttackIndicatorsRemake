@@ -74,6 +74,8 @@ namespace DTT.AreaOfEffectRegions.Demo
         /// </summary>
         private void Update()
         {
+            // do not update the previous demo projector positions.
+            return;
             if (!_projector)
                 return;
             _projector.transform.position = GetPosition();

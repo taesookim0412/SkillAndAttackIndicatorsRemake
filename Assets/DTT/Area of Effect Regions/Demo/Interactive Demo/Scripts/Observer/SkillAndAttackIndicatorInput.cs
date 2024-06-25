@@ -18,7 +18,34 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
         {
             if (ctx.performed)
             {
-                SkillAndAttackIndicatorSystem.TriggerSkillAndAttackIndicatorObserver(AbilityProjectorType.Arc, 
+                SkillAndAttackIndicatorSystem.TriggerSkillAndAttackIndicatorObserver(AbilityProjectorType.Arc,
+                    AbilityProjectorMaterialType.First,
+                    AbilityIndicatorCastType.ShowDuringCast);
+            }
+        }
+        public void OnAbility2(CallbackContext ctx)
+        {
+            if (ctx.performed)
+            {
+                SkillAndAttackIndicatorSystem.TriggerSkillAndAttackIndicatorObserver(AbilityProjectorType.Circle,
+                    AbilityProjectorMaterialType.First,
+                    AbilityIndicatorCastType.ShowDuringCast);
+            }
+        }
+        public void OnAbility3(CallbackContext ctx)
+        {
+            if (ctx.performed)
+            {
+                SkillAndAttackIndicatorSystem.TriggerSkillAndAttackIndicatorObserver(AbilityProjectorType.Line,
+                    AbilityProjectorMaterialType.First,
+                    AbilityIndicatorCastType.ShowDuringCast);
+            }
+        }
+        public void OnAbility4(CallbackContext ctx)
+        {
+            if (ctx.performed)
+            {
+                SkillAndAttackIndicatorSystem.TriggerSkillAndAttackIndicatorObserver(AbilityProjectorType.ScatterLine,
                     AbilityProjectorMaterialType.First,
                     AbilityIndicatorCastType.ShowDuringCast);
             }

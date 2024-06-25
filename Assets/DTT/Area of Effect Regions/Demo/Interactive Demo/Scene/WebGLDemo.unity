@@ -7831,6 +7831,57 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5c8507d0-11b9-48cf-be40-2f0233133fbc
     m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1332206774}
+        m_TargetAssemblyTypeName: Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observer.SkillAndAttackIndicatorInput,
+          Assembly-CSharp
+        m_MethodName: OnAbility2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 59a457f9-e80b-409e-83ce-8dacac9aeda1
+    m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1332206774}
+        m_TargetAssemblyTypeName: Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observer.SkillAndAttackIndicatorInput,
+          Assembly-CSharp
+        m_MethodName: OnAbility3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ff43953d-361d-439e-a118-85dacef39083
+    m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1332206774}
+        m_TargetAssemblyTypeName: Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observer.SkillAndAttackIndicatorInput,
+          Assembly-CSharp
+        m_MethodName: OnAbility4
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e37a5452-ff71-4aa8-8383-1fb8e645ac0a
+    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

@@ -76,19 +76,28 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
                             break;
                         case AbilityProjectorType.Circle:
                             CircleRegionProjector circleRegionProjector = ProjectorGameObject.GetComponent<CircleRegionProjector>();
-                            //circleRegionProjector.UpdateProjectors();
+                            circleRegionProjector.Radius = 70;
+                            circleRegionProjector.UpdateProjectors();
                             break;
                         case AbilityProjectorType.Line:
                             LineRegionProjector lineRegionProjector = ProjectorGameObject.GetComponent<LineRegionProjector>();
-                            //lineRegionProjector.UpdateProjectors();
+                            lineRegionProjector.Length = 70;
+                            lineRegionProjector.UpdateProjectors();
                             break;
                         case AbilityProjectorType.ScatterLine:
                             ScatterLineRegionProjector scatterLineRegionProjector = ProjectorGameObject.GetComponent<ScatterLineRegionProjector>();
-                            //scatterLineRegionProjector.UpdateLines();
+                            scatterLineRegionProjector.Length = 70;
+                            scatterLineRegionProjector.Add(3);
+                            scatterLineRegionProjector.UpdateLines();
                             break;
                     }
 
                     ProjectorSet = true;
+                }
+                else
+                {
+                    ObserverStatus = ObserverStatus.Remove;
+                    return;
                 }
             }
 

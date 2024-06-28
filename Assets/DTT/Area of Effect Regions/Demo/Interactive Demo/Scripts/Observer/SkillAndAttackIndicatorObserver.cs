@@ -28,6 +28,10 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
         public static readonly string[] AbilityProjectorMaterialTypeNames = Enum.GetNames(typeof(AbilityProjectorMaterialType));
         public static readonly int AbilityProjectorMaterialTypeNamesLength = AbilityProjectorMaterialTypeNames.Length;
 
+        // The orthographic length is based on a radius so it is half the desired length.
+        // Then, it must be multiplied by half again because it is a "half-length" in the documentation.
+        private static readonly float OrthographicRadiusHalfDivMult = 1 / 4f;
+
         private SkillAndAttackIndicatorObserverProps Props;
 
         public ObserverStatus ObserverStatus = ObserverStatus.Active;
@@ -72,16 +76,27 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
                         case AbilityProjectorType.Arc:
                             ArcRegionProjector arcRegionProjector = ProjectorGameObject.GetComponent<ArcRegionProjector>();
                             arcRegionProjector.Radius = 70;
+                            arcRegionProjector.SetIgnoreLayers(Props.SkillAndAttackIndicatorSystem.ProjectorIgnoreLayersMask);
+
                             arcRegionProjector.UpdateProjectors();
                             break;
                         case AbilityProjectorType.Circle:
                             CircleRegionProjector circleRegionProjector = ProjectorGameObject.GetComponent<CircleRegionProjector>();
                             circleRegionProjector.Radius = 70;
+
+                            circleRegionProjector.SetIgnoreLayers(Props.SkillAndAttackIndicatorSystem.ProjectorIgnoreLayersMask);
                             circleRegionProjector.UpdateProjectors();
                             break;
                         case AbilityProjectorType.Line:
                             LineRegionProjector lineRegionProjector = ProjectorGameObject.GetComponent<LineRegionProjector>();
-                            lineRegionProjector.Length = 70;
+
+                            // hard coded length units.
+                            int lineLengthUnits = 25;
+                            // multiply it by the orthographicRadiusHalfDivMultiplier
+                            float orthographicLength = lineLengthUnits * OrthographicRadiusHalfDivMult;
+                            lineRegionProjector.Length = orthographicLength;
+
+                            lineRegionProjector.SetIgnoreLayers(Props.SkillAndAttackIndicatorSystem.ProjectorIgnoreLayersMask);
                             lineRegionProjector.UpdateProjectors();
                             break;
                         case AbilityProjectorType.ScatterLine:
@@ -89,6 +104,8 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
                             scatterLineRegionProjector.Length = 70;
                             scatterLineRegionProjector.Add(3);
                             scatterLineRegionProjector.UpdateLines();
+
+                            // SetIgnoreLayers not supported with the current scatterlineregionprojector...
                             break;
                     }
 

@@ -77,7 +77,7 @@ namespace DTT.AreaOfEffectRegions
         [Range(0f, 1f)]
         [SerializeField]
         private float _fillProgress;
-        
+
         /// <summary>
         /// Origin of the fill color.
         /// </summary>
@@ -118,7 +118,7 @@ namespace DTT.AreaOfEffectRegions
         /// The shader ID of the <c>_FillProgress</c> property.
         /// </summary>
         private static readonly int FillProgressShaderID = Shader.PropertyToID("_FillProgress");
-        
+
         /// <summary>
         /// The shader ID of the <c>_Origin</c> property.
         /// </summary>
@@ -132,6 +132,14 @@ namespace DTT.AreaOfEffectRegions
             ReassignMaterials();
             UpdateProjectors();
             ResetProjectorsRenderingOrder();
+        }
+        public void SetIgnoreLayers(LayerMask layerMask)
+        {
+            if (_circleProjector != null)
+                _circleProjector.ignoreLayers = layerMask;
+
+            if (_centerDotProjector != null)
+                _centerDotProjector.ignoreLayers = layerMask;
         }
 
         /// <summary>

@@ -254,6 +254,24 @@ namespace DTT.AreaOfEffectRegions
             ResetProjectorsRenderingOrder();
         }
 
+        public void SetIgnoreLayers(LayerMask layerMask)
+        {
+            if (_circleProjector != null)
+                _circleProjector.ignoreLayers = layerMask;
+
+            if (_circleDecorationProjector != null)
+                _circleDecorationProjector.ignoreLayers = layerMask;
+
+            if (_centerDotProjector != null)
+                _centerDotProjector.ignoreLayers = layerMask;
+
+            if (_leftBorderProjector != null)
+                _leftBorderProjector.ignoreLayers = layerMask;
+
+            if (_rightBorderProjector != null)
+                _rightBorderProjector.ignoreLayers = layerMask;
+        }
+
         /// <summary>
         /// Update projectors if there are any changes made in the inspector.
         /// </summary>

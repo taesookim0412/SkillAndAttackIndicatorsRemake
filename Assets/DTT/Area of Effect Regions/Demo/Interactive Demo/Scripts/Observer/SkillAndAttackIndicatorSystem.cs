@@ -14,6 +14,8 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
         public LayerMask TerrainLayer;
         [SerializeField]
         public MonoBehaviour[] Projectors;
+        [SerializeField]
+        public LayerMask ProjectorIgnoreLayersMask;
 
         [HideInInspector]
         public Camera Camera;

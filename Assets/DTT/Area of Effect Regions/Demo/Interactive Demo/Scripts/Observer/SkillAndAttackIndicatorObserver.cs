@@ -45,8 +45,19 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
         private MonoBehaviour ProjectorMonoBehaviour;
         private GameObject ProjectorGameObject;
 
+        private ArcRegionProjector ArcRegionProjectorRef;
+        private CircleRegionProjector CircleRegionProjectorRef;
+        private LineRegionProjector LineRegionProjectorRef;
+        private ScatterLineRegionProjector ScatterLineRegionProjectorRef;
+
+        private long ChargeDuration;
+        private float ChargeDurationFloat;
+
+        private float PreviousChargeDurationFloatPercentage;
+
         private long LastTickTime;
         private long ElapsedTime;
+        private float ElapsedTimeFloat;
 
         public SkillAndAttackIndicatorObserver(AbilityProjectorType abilityProjectorType,
             AbilityProjectorMaterialType abilityProjectorMaterialType, AbilityIndicatorCastType abilityIndicatorCastType,
@@ -79,6 +90,8 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
                             arcRegionProjector.SetIgnoreLayers(Props.SkillAndAttackIndicatorSystem.ProjectorIgnoreLayersMask);
 
                             arcRegionProjector.UpdateProjectors();
+
+                            ArcRegionProjectorRef = arcRegionProjector;
                             break;
                         case AbilityProjectorType.Circle:
                             CircleRegionProjector circleRegionProjector = ProjectorGameObject.GetComponent<CircleRegionProjector>();
@@ -86,6 +99,8 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
 
                             circleRegionProjector.SetIgnoreLayers(Props.SkillAndAttackIndicatorSystem.ProjectorIgnoreLayersMask);
                             circleRegionProjector.UpdateProjectors();
+
+                            CircleRegionProjectorRef = circleRegionProjector;
                             break;
                         case AbilityProjectorType.Line:
                             LineRegionProjector lineRegionProjector = ProjectorGameObject.GetComponent<LineRegionProjector>();
@@ -98,6 +113,8 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
 
                             lineRegionProjector.SetIgnoreLayers(Props.SkillAndAttackIndicatorSystem.ProjectorIgnoreLayersMask);
                             lineRegionProjector.UpdateProjectors();
+
+                            LineRegionProjectorRef = lineRegionProjector;
                             break;
                         case AbilityProjectorType.ScatterLine:
                             ScatterLineRegionProjector scatterLineRegionProjector = ProjectorGameObject.GetComponent<ScatterLineRegionProjector>();
@@ -105,11 +122,34 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
                             scatterLineRegionProjector.Add(3);
                             scatterLineRegionProjector.UpdateLines();
 
+                            ScatterLineRegionProjectorRef = scatterLineRegionProjector;
                             // SetIgnoreLayers not supported with the current scatterlineregionprojector...
                             break;
+                        default:
+                            ObserverStatus = ObserverStatus.Remove;
+                            return;
+                    }
+
+                    switch (AbilityProjectorMaterialType) {
+                        case AbilityProjectorMaterialType.First:
+                            ChargeDuration = 800L;
+                            ChargeDurationFloat = 800f;
+                            break;
+                        case AbilityProjectorMaterialType.Second:
+                            ChargeDuration = 5000L;
+                            ChargeDurationFloat = 5000f;
+                            break;
+                        case AbilityProjectorMaterialType.Third:
+                            ChargeDuration = 7000L;
+                            ChargeDurationFloat = 7000f;
+                            break;
+                        default:
+                            ObserverStatus = ObserverStatus.Remove;
+                            return;
                     }
 
                     ProjectorSet = true;
+                    LastTickTime = Props.ObserverUpdateProps.UpdateTickTime;
                 }
                 else
                 {
@@ -117,18 +157,53 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
                     return;
                 }
             }
-
-            ElapsedTime += Props.ObserverUpdateProps.UpdateTickTimeDeltaTime;
-
-            Vector3 terrainPosition = GetTerrainPosition();
-            ProjectorGameObject.transform.position = terrainPosition;
-
-
-            if (ElapsedTime > 5000L)
+            else
             {
-                InstancePool.ReturnPooled(ProjectorMonoBehaviour);
-                ObserverStatus = ObserverStatus.Remove;
+                long elapsedTickTime = Props.ObserverUpdateProps.UpdateTickTime - LastTickTime;
+                LastTickTime = Props.ObserverUpdateProps.UpdateTickTime;
+                ElapsedTime += elapsedTickTime;
+                ElapsedTimeFloat += elapsedTickTime * 0.001f;
+
+                switch (AbilityProjectorType)
+                {
+                    case AbilityProjectorType.Arc:
+                        break;
+                    case AbilityProjectorType.Circle:
+                        break;
+
+                    case AbilityProjectorType.Line:
+                        if (PreviousChargeDurationFloatPercentage < 1f)
+                        {
+                            float chargeDurationPercentage = Mathf.Lerp(PreviousChargeDurationFloatPercentage,
+                                1f,
+                                Mathf.SmoothStep(0f, 1f, Mathf.SmoothStep(0f, 1f, ElapsedTimeFloat)));
+
+                            if (chargeDurationPercentage > PreviousChargeDurationFloatPercentage)
+                            {
+                                LineRegionProjectorRef.FillProgress = chargeDurationPercentage;
+                                LineRegionProjectorRef.UpdateProjectors();
+                                PreviousChargeDurationFloatPercentage = chargeDurationPercentage;
+                            }
+                        }
+                        break;
+
+                    case AbilityProjectorType.ScatterLine:
+
+                        break;
+
+                }
+
+                Vector3 terrainPosition = GetTerrainPosition();
+                ProjectorGameObject.transform.position = terrainPosition;
+
+                if (ElapsedTime > ChargeDuration)
+                {
+                    InstancePool.ReturnPooled(ProjectorMonoBehaviour);
+                    ObserverStatus = ObserverStatus.Remove;
+                }
             }
+
+
         }
         private Vector3 GetTerrainPosition()
         {

@@ -9,7 +9,6 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
     public class ObserverUpdateProps
     {
         public long UpdateTickTime;
-        public long UpdateTickTimeDeltaTime;
 
         public ObserverUpdateProps(long updateTickTime)
         {
@@ -17,11 +16,8 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
         }
 
         public void Update_MainThread() 
-        { 
-            long newUpdateTickTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-
-            UpdateTickTimeDeltaTime = newUpdateTickTime - UpdateTickTime;
-            UpdateTickTime = newUpdateTickTime;
+        {
+            UpdateTickTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         }
     }
 }

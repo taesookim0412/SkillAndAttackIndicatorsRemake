@@ -27,15 +27,6 @@ namespace DTT.AreaOfEffectRegions
         private Projector _bodyProjector;
 
         /// <summary>
-        /// The amount the line is filled.
-        /// </summary>
-        public float FillProgress
-        {
-            get => _fillProgress;
-            set => _fillProgress = Mathf.Clamp01(value);
-        }
-
-        /// <summary>
         /// The origin of the fill color.
         /// </summary>
         public Origin FillProgressDirection
@@ -77,7 +68,7 @@ namespace DTT.AreaOfEffectRegions
         /// </summary>
         [SerializeField]
         [Range(0, 1)]
-        private float _fillProgress;
+        public float FillProgress;
 
         /// <summary>
         /// The origin of the fill color.
@@ -259,23 +250,23 @@ namespace DTT.AreaOfEffectRegions
             switch (_fillOrigin)
             {
                 case (Origin.BOTTOM):
-                    _headProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01(-1f + _fillProgress * 2));
+                    _headProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01(-1f + FillProgress * 2));
                     break;
                 case Origin.TOP:
-                    _headProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( 1 - _fillProgress * 2));
+                    _headProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( 1 - FillProgress * 2));
                     break;
                 case Origin.LEFT:
-                    _headProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( _fillProgress ));
+                    _headProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( FillProgress ));
                     break;
                 case Origin.RIGHT :
-                    _headProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( 1-_fillProgress ));
+                    _headProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( 1-FillProgress ));
                     break;
                 case Origin.CENTER:
                     _bodyProjector.material.SetInt(FillDirection, Origin.BOTTOM.ToInt());
-                    _headProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( _fillProgress ));
+                    _headProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( FillProgress ));
                     break;
                 default:
-                    _headProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01(-1f + _fillProgress * 2));
+                    _headProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01(-1f + FillProgress * 2));
                     break;
             }
         }
@@ -302,23 +293,23 @@ namespace DTT.AreaOfEffectRegions
             switch (_fillOrigin)
             {
                 case (Origin.BOTTOM):
-                    _bodyProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( _fillProgress * 2));
+                    _bodyProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( FillProgress * 2));
                     break;
                 case Origin.TOP:
-                    _bodyProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( 2- _fillProgress * 2));
+                    _bodyProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( 2- FillProgress * 2));
                     break;
                 case Origin.LEFT:
-                    _bodyProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( _fillProgress ));
+                    _bodyProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( FillProgress ));
                     break;
                 case Origin.RIGHT :
-                    _bodyProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( 1-_fillProgress ));
+                    _bodyProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( 1-FillProgress ));
                     break;
                 case Origin.CENTER:
                     _bodyProjector.material.SetInt(FillDirection, Origin.TOP.ToInt());
-                    _bodyProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( 1-_fillProgress ));
+                    _bodyProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( 1-FillProgress ));
                     break;
                 default:
-                    _bodyProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( _fillProgress * 2));
+                    _bodyProjector.material.SetFloat(FillProgressShaderID, Mathf.Clamp01( FillProgress * 2));
                     break;
             }
         }

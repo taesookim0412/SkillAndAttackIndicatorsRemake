@@ -51,7 +51,6 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
         private ScatterLineRegionProjector ScatterLineRegionProjectorRef;
 
         private long ChargeDuration;
-        private float ChargeDurationFloat;
 
         private float PreviousChargeDurationFloatPercentage;
 
@@ -133,15 +132,12 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
                     switch (AbilityProjectorMaterialType) {
                         case AbilityProjectorMaterialType.First:
                             ChargeDuration = 800L;
-                            ChargeDurationFloat = 800f;
                             break;
                         case AbilityProjectorMaterialType.Second:
                             ChargeDuration = 5000L;
-                            ChargeDurationFloat = 5000f;
                             break;
                         case AbilityProjectorMaterialType.Third:
                             ChargeDuration = 7000L;
-                            ChargeDurationFloat = 7000f;
                             break;
                         default:
                             ObserverStatus = ObserverStatus.Remove;

@@ -51,12 +51,13 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
         private ScatterLineRegionProjector ScatterLineRegionProjectorRef;
 
         private long ChargeDuration;
+        private float ChargeDurationSecondsFloat;
 
         private float PreviousChargeDurationFloatPercentage;
 
         private long LastTickTime;
         private long ElapsedTime;
-        private float ElapsedTimeFloat;
+        private float ElapsedTimeSecondsFloat;
 
         public SkillAndAttackIndicatorObserver(AbilityProjectorType abilityProjectorType,
             AbilityProjectorMaterialType abilityProjectorMaterialType, AbilityIndicatorCastType abilityIndicatorCastType,
@@ -132,12 +133,15 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
                     switch (AbilityProjectorMaterialType) {
                         case AbilityProjectorMaterialType.First:
                             ChargeDuration = 800L;
+                            ChargeDurationSecondsFloat = 800 * 0.001f;
                             break;
                         case AbilityProjectorMaterialType.Second:
                             ChargeDuration = 5000L;
+                            ChargeDurationSecondsFloat = 5000 * 0.001f;
                             break;
                         case AbilityProjectorMaterialType.Third:
                             ChargeDuration = 7000L;
+                            ChargeDurationSecondsFloat = 7000 * 0.001f;
                             break;
                         default:
                             ObserverStatus = ObserverStatus.Remove;
@@ -158,7 +162,7 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
                 long elapsedTickTime = Props.ObserverUpdateProps.UpdateTickTime - LastTickTime;
                 LastTickTime = Props.ObserverUpdateProps.UpdateTickTime;
                 ElapsedTime += elapsedTickTime;
-                ElapsedTimeFloat += elapsedTickTime * 0.001f;
+                ElapsedTimeSecondsFloat += elapsedTickTime * 0.001f;
 
                 switch (AbilityProjectorType)
                 {
@@ -170,13 +174,12 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
                     case AbilityProjectorType.Line:
                         if (PreviousChargeDurationFloatPercentage < 1f)
                         {
-                            float chargeDurationPercentage = Mathf.Lerp(PreviousChargeDurationFloatPercentage,
-                                1f,
-                                Mathf.SmoothStep(0f, 1f, Mathf.SmoothStep(0f, 1f, ElapsedTimeFloat)));
+                            float chargeDurationPercentage = ElapsedTimeSecondsFloat / ChargeDurationSecondsFloat;
 
                             if (chargeDurationPercentage > PreviousChargeDurationFloatPercentage)
                             {
-                                LineRegionProjectorRef.FillProgress = chargeDurationPercentage;
+                                float newFillProgress = EaseInOutExpo(chargeDurationPercentage);
+                                LineRegionProjectorRef.FillProgress = newFillProgress;
                                 LineRegionProjectorRef.UpdateProjectors();
                                 PreviousChargeDurationFloatPercentage = chargeDurationPercentage;
                             }
@@ -198,8 +201,11 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
                     ObserverStatus = ObserverStatus.Remove;
                 }
             }
-
-
+        }
+        private float EaseInOutExpo(float percentage)
+        {
+            return percentage < 0.5f ? (float)Math.Pow(2, 20 * percentage - 10) / 2 :
+                (2 - (float)Math.Pow(2, -20 * percentage + 10)) / 2;
         }
         private Vector3 GetTerrainPosition()
         {

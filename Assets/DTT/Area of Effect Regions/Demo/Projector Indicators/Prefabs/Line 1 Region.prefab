@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _headProjector: {fileID: 4053705578713563146}
   _bodyProjector: {fileID: 4053705578835814022}
-  _fillProgress: 0.5
+  FillProgress: 0
   _fillOrigin: 0
   _fadeAmount: 0.04
   _angle: 0

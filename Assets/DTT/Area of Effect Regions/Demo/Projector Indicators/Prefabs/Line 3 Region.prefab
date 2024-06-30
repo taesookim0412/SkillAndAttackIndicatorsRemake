@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _headProjector: {fileID: 332841456530378471}
   _bodyProjector: {fileID: 332841456952983155}
-  _fillProgress: 0.5
+  FillProgress: 0
   _fillOrigin: 0
   _fadeAmount: 0.25
   _angle: 0

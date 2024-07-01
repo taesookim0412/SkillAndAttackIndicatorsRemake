@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4053705578713563141}
   - component: {fileID: 4053705578713563146}
-  - component: {fileID: 914664852590374963}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -48,32 +47,10 @@ Projector:
   m_AspectRatio: 1
   m_Orthographic: 1
   m_OrthographicSize: 1
-  m_Material: {fileID: 2100000, guid: 37aef3c931a6ea44597285db6a236204, type: 2}
+  m_Material: {fileID: 2100000, guid: 19b4c55923cfb0a4699225de4023718b, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 0
---- !u!114 &914664852590374963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4053705578713563140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa3e43c58dd834028baaf021101d7ca8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderingLayerMask: 4294967295
-  renderQueueLowerBound: 0
-  renderQueueUpperBound: 2500
-  terrainRenderFlags: 6
-  terrainsToBeFilteredWithRenderFlags: []
-  m_shaderTagList: []
-  m_renderPassEvent: 400
-  m_perObjectData: 0
-  m_stencilPass: {fileID: 0}
-  m_stencilTestOptions: 0
 --- !u!1 &4053705578835814016
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,7 +61,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4053705578835814017}
   - component: {fileID: 4053705578835814022}
-  - component: {fileID: 8704181417179745864}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -122,32 +98,10 @@ Projector:
   m_AspectRatio: 1
   m_Orthographic: 1
   m_OrthographicSize: 1
-  m_Material: {fileID: 2100000, guid: 36c9d021d38237b4fa878ab127c67d10, type: 2}
+  m_Material: {fileID: 2100000, guid: a171c25c45232a940b1c3aacea1bd5ea, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 0
---- !u!114 &8704181417179745864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4053705578835814016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa3e43c58dd834028baaf021101d7ca8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderingLayerMask: 4294967295
-  renderQueueLowerBound: 0
-  renderQueueUpperBound: 2500
-  terrainRenderFlags: 6
-  terrainsToBeFilteredWithRenderFlags: []
-  m_shaderTagList: []
-  m_renderPassEvent: 400
-  m_perObjectData: 0
-  m_stencilPass: {fileID: 0}
-  m_stencilTestOptions: 0
 --- !u!1 &4053705580301617857
 GameObject:
   m_ObjectHideFlags: 0

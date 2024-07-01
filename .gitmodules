@@ -1,0 +1,4 @@
+[submodule "Assets/ProjectorForLWRP"]
+	path = Assets/ProjectorForLWRP
+	url = https://github.com/nyahoon-games/ProjectorForLWRP.git
+	branch = master-universalrp

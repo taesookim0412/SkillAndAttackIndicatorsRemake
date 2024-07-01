@@ -28,6 +28,7 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
         public static readonly string[] AbilityProjectorMaterialTypeNames = Enum.GetNames(typeof(AbilityProjectorMaterialType));
         public static readonly int AbilityProjectorMaterialTypeNamesLength = AbilityProjectorMaterialTypeNames.Length;
 
+        private static readonly float RadiusHalfDivMult = 1 / 2f;
         // The orthographic length is based on a radius so it is half the desired length.
         // Then, it must be multiplied by half again because it is a "half-length" in the documentation.
         private static readonly float OrthographicRadiusHalfDivMult = 1 / 4f;
@@ -45,10 +46,10 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
         private MonoBehaviour ProjectorMonoBehaviour;
         private GameObject ProjectorGameObject;
 
-        private ArcRegionProjector ArcRegionProjectorRef;
-        private CircleRegionProjector CircleRegionProjectorRef;
-        private LineRegionProjector LineRegionProjectorRef;
-        private ScatterLineRegionProjector ScatterLineRegionProjectorRef;
+        private SRPArcRegionProjector ArcRegionProjectorRef;
+        private SRPCircleRegionProjector CircleRegionProjectorRef;
+        private SRPLineRegionProjector LineRegionProjectorRef;
+        private SRPScatterLineRegionProjector ScatterLineRegionProjectorRef;
 
         private long ChargeDuration;
         private float ChargeDurationSecondsFloat;
@@ -85,42 +86,45 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
                     switch (AbilityProjectorType)
                     {
                         case AbilityProjectorType.Arc:
-                            ArcRegionProjector arcRegionProjector = ProjectorGameObject.GetComponent<ArcRegionProjector>();
+                            
+                            SRPArcRegionProjector arcRegionProjector = ProjectorGameObject.GetComponent<SRPArcRegionProjector>();
                             arcRegionProjector.Radius = 70;
-                            arcRegionProjector.SetIgnoreLayers(Props.SkillAndAttackIndicatorSystem.ProjectorIgnoreLayersMask);
+                            //arcRegionProjector.SetIgnoreLayers(Props.SkillAndAttackIndicatorSystem.ProjectorIgnoreLayersMask);
 
-                            arcRegionProjector.UpdateProjectors();
+                            arcRegionProjector.GenerateProjector();
 
                             ArcRegionProjectorRef = arcRegionProjector;
                             break;
                         case AbilityProjectorType.Circle:
-                            CircleRegionProjector circleRegionProjector = ProjectorGameObject.GetComponent<CircleRegionProjector>();
+                            SRPCircleRegionProjector circleRegionProjector = ProjectorGameObject.GetComponent<SRPCircleRegionProjector>();
                             circleRegionProjector.Radius = 70;
 
-                            circleRegionProjector.SetIgnoreLayers(Props.SkillAndAttackIndicatorSystem.ProjectorIgnoreLayersMask);
-                            circleRegionProjector.UpdateProjectors();
+                            //circleRegionProjector.SetIgnoreLayers(Props.SkillAndAttackIndicatorSystem.ProjectorIgnoreLayersMask);
+                            circleRegionProjector.GenerateProjector();
 
                             CircleRegionProjectorRef = circleRegionProjector;
                             break;
                         case AbilityProjectorType.Line:
-                            LineRegionProjector lineRegionProjector = ProjectorGameObject.GetComponent<LineRegionProjector>();
+                            SRPLineRegionProjector lineRegionProjector = ProjectorGameObject.GetComponent<SRPLineRegionProjector>();
 
                             // hard coded length units.
                             int lineLengthUnits = 25;
                             // multiply it by the orthographicRadiusHalfDivMultiplier
-                            float orthographicLength = lineLengthUnits * OrthographicRadiusHalfDivMult;
-                            lineRegionProjector.Length = orthographicLength;
+                            //float orthographicLength = lineLengthUnits * OrthographicRadiusHalfDivMult;
+                            lineRegionProjector.Length = lineLengthUnits * RadiusHalfDivMult;
 
-                            lineRegionProjector.SetIgnoreLayers(Props.SkillAndAttackIndicatorSystem.ProjectorIgnoreLayersMask);
-                            lineRegionProjector.UpdateProjectors();
+                            //lineRegionProjector.SetIgnoreLayers(Props.SkillAndAttackIndicatorSystem.ProjectorIgnoreLayersMask);
+                            lineRegionProjector.GenerateProjector();
+                            lineRegionProjector.Depth = 100f;
 
                             LineRegionProjectorRef = lineRegionProjector;
                             break;
                         case AbilityProjectorType.ScatterLine:
-                            ScatterLineRegionProjector scatterLineRegionProjector = ProjectorGameObject.GetComponent<ScatterLineRegionProjector>();
+                            SRPScatterLineRegionProjector scatterLineRegionProjector = ProjectorGameObject.GetComponent<SRPScatterLineRegionProjector>();
                             scatterLineRegionProjector.Length = 70;
                             scatterLineRegionProjector.Add(3);
-                            scatterLineRegionProjector.UpdateLines();
+
+                            scatterLineRegionProjector.GenerateProjector();
 
                             ScatterLineRegionProjectorRef = scatterLineRegionProjector;
                             // SetIgnoreLayers not supported with the current scatterlineregionprojector...
@@ -135,14 +139,14 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
                             ChargeDuration = 800L;
                             ChargeDurationSecondsFloat = 800 * 0.001f;
                             break;
-                        case AbilityProjectorMaterialType.Second:
-                            ChargeDuration = 5000L;
-                            ChargeDurationSecondsFloat = 5000 * 0.001f;
-                            break;
-                        case AbilityProjectorMaterialType.Third:
-                            ChargeDuration = 7000L;
-                            ChargeDurationSecondsFloat = 7000 * 0.001f;
-                            break;
+                        //case AbilityProjectorMaterialType.Second:
+                        //    ChargeDuration = 5000L;
+                        //    ChargeDurationSecondsFloat = 5000 * 0.001f;
+                        //    break;
+                        //case AbilityProjectorMaterialType.Third:
+                        //    ChargeDuration = 7000L;
+                        //    ChargeDurationSecondsFloat = 7000 * 0.001f;
+                        //    break;
                         default:
                             ObserverStatus = ObserverStatus.Remove;
                             return;
@@ -236,9 +240,7 @@ namespace Assets.DTT.Area_of_Effect_Regions.Demo.Interactive_Demo.Scripts.Observ
     }
     public enum AbilityProjectorMaterialType
     {
-        First,
-        Second,
-        Third
+        First
     }
     public enum AbilityIndicatorCastType
     {

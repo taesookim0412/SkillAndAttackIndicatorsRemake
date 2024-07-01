@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 05c4b16c0a86ad14a831e32ba5ff4e7a
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 221125
+  packageName: Skill & Attack Indicators
+  packageVersion: 1.4.0
+  assetPath: Assets/DTT/Area of Effect Regions/Runtime/Mesh Indicators/Shaders/ArcShader.shader
+  uploadId: 552211

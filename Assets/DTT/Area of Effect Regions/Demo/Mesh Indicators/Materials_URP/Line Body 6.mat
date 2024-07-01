@@ -2,25 +2,20 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Line Head 1
-  m_Shader: {fileID: 4800000, guid: a7a3b1ce7a0669349bd596fcbe5b1bf1, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _ALPHABLEND_ON
+  m_Name: Line Body 6
+  m_Shader: {fileID: 4800000, guid: f1d205ebf4948da4093167f3ab793e22, type: 3}
+  m_ShaderKeywords: _ALPHABLEND_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -45,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 29ebd09fffcb20e488f15c42a35bcc1d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7a0ac2ce1c65c5e4cb9abff2de4da96b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -60,32 +55,30 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
     m_Floats:
     - _BumpScale: 1
+    - _ColorProgress: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
-    - _FadeAmount: 0.100000024
-    - _FillProgress: 0
+    - _FadeAmount: 1
+    - _FillProgress: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 2
     - _OcclusionStrength: 1
-    - _Origin: 0
     - _Parallax: 0.02
-    - _Progress: 0.514
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 5
     - _UVSec: 0
     - _ZWrite: 0
-    - _direction: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.84313726, b: 0, a: 1}
+    - _Color: {r: 0.65882355, g: 0.99215686, b: 0.9137255, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FillColor: {r: 0, g: 0.34117648, b: 0.7176471, a: 1}
+    - _FillColor: {r: 1, g: 1, b: 1, a: 0.5}
+    - _PrimaryColor: {r: 1, g: 0, b: 0, a: 1}
+    - _SecondaryColor: {r: 0, g: 1, b: 0.19833946, a: 1}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
